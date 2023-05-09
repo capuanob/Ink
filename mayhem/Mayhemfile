@@ -5,3 +5,4 @@ testsuite:
 cmds:
   - cmd: /release/fuzz-ink
     libfuzzer: true
+    timeout: 2

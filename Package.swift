@@ -21,8 +21,13 @@ let package = Package(
         .target(name: "InkFuzz", dependencies: ["Ink"],
                 path: "mayhem",
                 sources: ["main.swift", "FuzzedDataProvider.swift"],
-                swiftSettings: [.unsafeFlags(["-sanitize=fuzzer,address", "-parse-as-library"])],
-                linkerSettings: [.unsafeFlags(["-sanitize=fuzzer,address"])]),
+                swiftSettings: [
+                    .unsafeFlags(["-sanitize=fuzzer,address"]),
+                    .unsafeFlags(["-parse-as-library"])],
+                linkerSettings: [
+                    .unsafeFlags(["-sanitize=fuzzer,address"])
+                ]
+        ),
         .testTarget(name: "InkTests", dependencies: ["Ink"])
     ]
 )
