@@ -12,11 +12,17 @@ let package = Package(
     name: "Ink",
     products: [
         .library(name: "Ink", targets: ["Ink"]),
-        .executable(name: "ink-cli", targets: ["InkCLI"])
+        .executable(name: "ink-cli", targets: ["InkCLI"]),
+        .executable(name: "fuzz-ink", targets: ["InkFuzz"])
     ],
     targets: [
         .target(name: "Ink"),
         .target(name: "InkCLI", dependencies: ["Ink"]),
+        .target(name: "InkFuzz", dependencies: ["Ink"],
+                path: "mayhem",
+                sources: ["main.swift", "FuzzedDataProvider.swift"],
+                swiftSettings: [.unsafeFlags(["-sanitize=fuzzer,address", "-parse-as-library"])],
+                linkerSettings: [.unsafeFlags(["-fsanitize=fuzzer,address"])]),
         .testTarget(name: "InkTests", dependencies: ["Ink"])
     ]
 )
