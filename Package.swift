@@ -22,7 +22,7 @@ let package = Package(
                 path: "mayhem",
                 sources: ["main.swift", "FuzzedDataProvider.swift"],
                 swiftSettings: [.unsafeFlags(["-sanitize=fuzzer,address", "-parse-as-library"])],
-                linkerSettings: [.unsafeFlags(["-fsanitize=fuzzer,address"])]),
+                linkerSettings: [.unsafeFlags(["-sanitize=fuzzer,address"])]),
         .testTarget(name: "InkTests", dependencies: ["Ink"])
     ]
 )
